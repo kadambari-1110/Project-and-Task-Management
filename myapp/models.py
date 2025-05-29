@@ -18,7 +18,7 @@ class task(models.Model):
     name = models.CharField(max_length=20)
     description = models.CharField(max_length=100)  
     members = models.ForeignKey(User,on_delete=models.CASCADE,related_name="member")
-    status = models.CharField(choices=[('Pending','Pending'),('Completed','Completed')])
+    status = models.CharField(choices=[('Pending','Pending'),('Completed','Completed')],max_length=100)
     deadline = models.DateTimeField()
 
     def __str__(self):

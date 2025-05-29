@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Leader Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #bdc3c7, #2c3e50);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #1f2f46;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1000px;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #f1c40f;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #ddd;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <header>Team Leader Dashboard</header>
+
+    <div class="dashboard-container">
+        <div class="card" onclick="location.href='create_task.html'">
+            <div class="icon">✅</div>
+            <h2>Create Task</h2>
+            <p>Assign a new task to your team members.</p>
+        </div>
+
+        <div class="card" onclick="location.href='update_task.html'">
+            <div class="icon">🔄</div>
+            <h2>Update Task</h2>
+            <p>Edit task details, status, or deadlines.</p>
+        </div>
+
+        <div class="card" onclick="location.href='delete_task.html'">
+            <div class="icon">🗑️</div>
+            <h2>Delete Task</h2>
+            <p>Remove a task from the task list.</p>
+        </div>
+
+        <div class="card" onclick="location.href='view_tasks.html'">
+            <div class="icon">👁️</div>
+            <h2>View Tasks</h2>
+            <p>View all assigned tasks with details.</p>
+        </div>
+    </div>
+
+   
+
+</body>
+</html>
