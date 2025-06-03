@@ -22,3 +22,10 @@ def team_lead_dashboard(request):
 
 def member_dashboard(request):
     return render(request,"member_dashboard.html")
+
+def create_project(request):
+  return render(request,"create_project.html")
+
+
+def create_task(request):
+     return render(request,"create_task.html")

@@ -9,6 +9,9 @@ urlpatterns = [
     path('manager_dashboard',views.manager_dashboard),
     path('team_lead_dashboard',views.team_lead_dashboard),
     path('member_dashboard',views.member_dashboard),
+    path('create_project',views.create_project),
+    path('create_task',views.create_task)
+   
 
   
 ]

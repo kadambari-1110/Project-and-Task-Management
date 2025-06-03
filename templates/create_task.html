@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Create Task</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #8e44ad, #3498db);
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .form-box {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 600px;
+      width: 100%;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      animation: slideIn 0.6s ease-out forwards;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .form-box:hover {
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    @keyframes slideIn {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    h1 {
+      text-align: center;
+      color: #f1c40f;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border-radius: 8px;
+      border: none;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 1rem;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      background: rgba(255, 255, 255, 0.3);
+      outline: none;
+      box-shadow: 0 0 8px rgba(241, 196, 15, 0.6);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #ddd;
+    }
+
+    button {
+      margin-top: 30px;
+      background: #f1c40f;
+      color: #333;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1.1rem;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #e1b700;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-box">
+    <h1>Create Task</h1>
+    <form method="POST">
+      {% csrf_token %}
+
+      <label for="project">Project</label>
+      <select id="project" name="project" required>
+        {% for project in projects %}
+          <option value="{{ project.id }}">{{ project.name }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="name">Task Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter task name" maxlength="20" required>
+
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="4" maxlength="100" placeholder="Enter task description" required></textarea>
+
+      <label for="members">Assign Member</label>
+      <select id="members" name="members" required>
+        {% for user in users %}
+          <option value="{{ user.id }}">{{ user.username }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="status">Status</label>
+      <select id="status" name="status" required>
+        <option value="Pending">Pending</option>
+        <option value="Completed">Completed</option>
+      </select>
+
+      <label for="deadline">Deadline</label>
+      <input type="datetime-local" id="deadline" name="deadline" required>
+
+      <button type="submit">Create Task</button>
+    </form>
+  </div>
+</body>
+</html>
