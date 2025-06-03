@@ -22,6 +22,18 @@ def login_form(request):
                 return HttpResponse("Error")
         else:
             return HttpResponse("Incorrect Credentials")
+        
+
+def project_submit(request):
+    if request.method == "POST":
+        name = request.POST['name']
+        description = request.POST['description']
+        date = request.POST['deadline']
+        team_lead = request.POST['team_lead']
+        proj = project(name=name,description=description,deadline=date,team_lead=user.objects.get(id=team_lead))
+        proj.save()
+
+        return HttpResponse("Project Created")
 
 def manager_dashboard(request):
     return render(request,"manager_dashboard.html")
@@ -34,7 +46,8 @@ def member_dashboard(request):
     return render(request,"member_dashboard.html")
 
 def create_project(request):
-  return render(request,"create_project.html")
+    users = user.objects.filter(role="team_leader")
+    return render(request,"create_project.html",{'users':users})
 
 
 def create_task(request):

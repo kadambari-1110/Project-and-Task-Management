@@ -96,7 +96,7 @@
 <body>
   <div class="form-box">
     <h1>Create Project</h1>
-    <form method="POST">
+    <form action="project_submit" method="POST">
       {% csrf_token %}
 
       <label for="name">Project Name</label>
@@ -110,8 +110,8 @@
 
       <label for="team_lead">Team Lead</label>
       <select id="team_lead" name="team_lead" required>
-        {% for user in team_leads %}
-          <option value="{{ user.id }}">{{ user.username }}</option>
+        {% for i in users %}
+          <option value="{{ i.name }}">{{ i.name }}</option>
         {% endfor %}
       </select>
 
