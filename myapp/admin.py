@@ -3,4 +3,4 @@ from .models import *
 
 # Register your models here.
 
-admin.site.register([project,task])
+admin.site.register([project,task,user])
