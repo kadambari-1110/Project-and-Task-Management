@@ -45,6 +45,30 @@ def display_project_details(request,id):
     project_object = project.objects.get(id=id)
     return render(request,"display_project_details.html",{"project":project_object})
 
+def update_project(request):
+        project_object = project.objects.all()
+        return render(request,"update_project.html",{"projects":project_object})
+
+def update_project_submit(request, id):
+    try:
+        project_object = project.objects.get(id=id)
+    except project.DoesNotExist:
+        return HttpResponse("Project not found")
+
+    if request.method == "POST":
+        # Update fields from the form
+        project_object.name = request.POST.get("name")
+        project_object.description = request.POST.get("description")
+        project_object.team_lead = request.POST.get("team_lead")
+        project_object.deadline=request.POST.get("deadline")
+        # Add other fields if your model has them
+
+        project_object.save()
+        return redirect("/project_detail/" + str(project_object.id))  # or your desired redirect URL
+    else:
+        return render(request, "update_project_submit.html", {"project": project_object})
+
+
 def manager_dashboard(request):
     return render(request,"manager_dashboard.html")
 
