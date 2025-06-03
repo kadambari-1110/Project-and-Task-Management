@@ -30,10 +30,20 @@ def project_submit(request):
         description = request.POST['description']
         date = request.POST['deadline']
         team_lead = request.POST['team_lead']
-        proj = project(name=name,description=description,deadline=date,team_lead=user.objects.get(id=team_lead))
-        proj.save()
+        project_object = project(name=name,description=description,deadline=date,team_lead=user.objects.get(id=team_lead))
+        project_object.save()
 
         return HttpResponse("Project Created")
+
+
+def display_project(request):
+        project_object = project.objects.all()
+        return render(request,"display_project.html",{"projects":project_object})
+
+
+def display_project_details(request,id):
+    project_object = project.objects.get(id=id)
+    return render(request,"display_project_details.html",{"project":project_object})
 
 def manager_dashboard(request):
     return render(request,"manager_dashboard.html")
