@@ -15,7 +15,7 @@ urlpatterns = [
 
     path('create_project/project_submit',views.project_submit),
     
-    path('update_project',views.update_project),
+    path('update_project',views.update_project,name="update_project"),
     path('update_project_submit/<int:id>',views.update_project_submit,name="update_project_submit"),
 
     path('create_task',views.create_task)
