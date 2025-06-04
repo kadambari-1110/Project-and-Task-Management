@@ -97,3 +97,47 @@ def create_project(request):
 
 def create_task(request):
      return render(request,"create_task.html")
+
+
+def display_task(request):
+        project_object = task.objects.all()
+        return render(request,"display_task.html",{"projects":project_object})
+
+
+def display_task_details(request, id):
+    if task.objects.filter(id=id).exists():
+        task_object = task.objects.get(id=id)
+        return render(request, "display_task_details.html", {"task": task_object})
+    else:
+        return HttpResponse("Task not found", status=404)
+
+def update_task(request):
+    task_object = task.objects.all()
+    return render(request, "update_task.html", {"task": task_object})
+
+def update_task_submit(request, id):
+    if task.objects.filter(id=id).exists():
+        task_object = task.objects.get(id=id)
+    else:
+        return HttpResponse("Task not found", status=404)
+
+    if request.method == "POST":
+        task_object.name = request.POST.get("name")
+        task_object.description = request.POST.get("description")
+        members = request.POST.get("member")
+        deadline = request.POST.get("deadline")
+        status = request.POST.get("status")
+
+        if user.objects.filter(name=members).exists():
+            task_object.team_lead = user.objects.get(name=members)
+        else:
+            return HttpResponse("Team lead not found", status=400)
+
+        task_object.deadline = deadline
+        task_object.status = status
+        task_object.save()
+
+        return redirect("/display_task_detail/" + str(task_object.id))  # adjust this URL as needed
+
+    return HttpResponse("Invalid request method", status=405)
+       
