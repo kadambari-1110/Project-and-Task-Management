@@ -129,7 +129,7 @@ def update_task_submit(request, id):
         status = request.POST.get("status")
 
         if user.objects.filter(name=members).exists():
-            task_object.team_lead = user.objects.get(name=members)
+            task_object.Member = user.objects.get(name=members)
         else:
             return HttpResponse("Team lead not found", status=400)
 
