@@ -168,7 +168,7 @@
     <div class="topbar">
       <h1>Welcome, To</h1>
       <div class="actions">
-        <button>Upgrade</button>
+        <button onclick="location.href='{% url 'team_lead_session_end' %}'">Logout</button>
         <button>Help</button>
       </div>
     </div>
@@ -180,22 +180,22 @@
     </div>
 
     <div class="card-container">
-      <div class="card" onclick="location.href='create_project.html'">
+      <div class="card" onclick="location.href='{% url 'create_task'  %}'">
         <div class="card-icon">🆕</div>
         <div class="card-title">Create Task</div>
         <div class="card-desc">Start a new Task and assign tasks</div>
       </div>
-      <div class="card" onclick="location.href='edit_project.html'">
+      <div class="card" onclick="location.href=''">
         <div class="card-icon">👁️</div>
-        <div class="card-title">View Project</div>
+        <div class="card-title">View Task</div>
         <div class="card-desc">See and modify project details</div>
       </div>
-      <div class="card" onclick="location.href='update_project.html'">
+      <div class="card" onclick="location.href=''">
         <div class="card-icon">🛠️</div>
         <div class="card-title">Update Status</div>
         <div class="card-desc">Track progress and update project status</div>
       </div>
-      <div class="card" onclick="location.href='delete_project.html'">
+      <div class="card" onclick="location.href=''">
         <div class="card-icon">🗑️</div>
         <div class="card-title">Delete Project</div>
         <div class="card-desc">Remove outdated or completed projects</div>
