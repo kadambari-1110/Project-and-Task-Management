@@ -96,12 +96,12 @@
 <body>
   <div class="form-box">
     <h1>Create Task</h1>
-    <form method="POST">
+    <form action="task_submit" method="POST">
       {% csrf_token %}
 
       <label for="project">Project</label>
       <select id="project" name="project" required>
-        {% for project in projects %}
+        {% for project in project %}
           <option value="{{ project.id }}">{{ project.name }}</option>
         {% endfor %}
       </select>
@@ -114,8 +114,8 @@
 
       <label for="members">Assign Member</label>
       <select id="members" name="members" required>
-        {% for user in users %}
-          <option value="{{ user.id }}">{{ user.username }}</option>
+        {% for user in members %}
+          <option value="{{ user.id }}">{{ user.name }}</option>
         {% endfor %}
       </select>
 
@@ -128,7 +128,7 @@
       <label for="deadline">Deadline</label>
       <input type="datetime-local" id="deadline" name="deadline" required>
 
-      <button type="submit">Create Task</button>
+      <button type="submit" >Create Task</button>
     </form>
   </div>
 </body>

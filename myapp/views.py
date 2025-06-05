@@ -110,9 +110,12 @@ def create_project(request):
 
 
 def create_task(request):
-     if request.session.get('admin') or request.session.get('team_lead'):
-        project_object=project.objects.get()
-        return render(request,"create_task.html")
+     if request.session.get('team_lead'):
+        temp = user.objects.get(user_id=request.session.get('team_lead'))
+        id = temp.id
+        project_object=project.objects.filter(team_lead=id)
+        member_object=user.objects.filter(role="member")
+        return render(request,"create_task.html",{"project":project_object,"members":member_object})
      
 
 def admin_session_end(request):
@@ -122,3 +125,21 @@ def admin_session_end(request):
 def team_lead_session_end(request):
     del request.session['team_lead'];
     return redirect("index")
+
+def task_submit(request):
+    if request.session.get('team_lead'):
+        if request.method == "POST":
+            proj = request.POST['project']
+            task_name = request.POST['name']
+            task_description = request.POST['description']
+            members = request.POST['members']
+            status = request.POST['status']
+            deadline = request.POST['deadline']
+
+            project_id = project.objects.get(id=proj)
+            user_id = user.objects.get(id=members)
+
+            task_object = task(project=project_id,name=task_name,description=task_description,members=user_id,status=status,deadline=deadline)
+            task_object.save()
+            
+            return HttpResponse("Task Created")
