@@ -143,3 +143,13 @@ def task_submit(request):
             task_object.save()
             
             return HttpResponse("Task Created")
+
+def display_task(request):
+    if request.session.get("team_lead"):
+        team_lead_us = request.session.get("team_lead")
+        user_object = user.objects.get(user_id=team_lead_us)
+        team_lead_id = user_object.id
+        project_object = project.objects.get(team_lead=team_lead_id)
+        project_id = project_object.id
+        task_object = task.objects.filter(project=project_id)
+        return render(request,"display_task.html",{"tasks":task_object})

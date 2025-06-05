@@ -27,6 +27,8 @@ urlpatterns = [
     path('team_lead_session_end',views.team_lead_session_end,name="team_lead_session_end"),
 
     path('task_submit',views.task_submit,name="task_submit"),
+    path('display_task',views.display_task,name="display_task"),
+
    
 
   
