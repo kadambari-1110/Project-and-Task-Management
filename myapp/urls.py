@@ -29,6 +29,8 @@ urlpatterns = [
     path('task_submit',views.task_submit,name="task_submit"),
     path('display_task',views.display_task,name="display_task"),
 
+    path('update_task',views.update_task,name="update_task"),
+    path('delete_task',views.delete_task,name="delete_task"),
    
 
   

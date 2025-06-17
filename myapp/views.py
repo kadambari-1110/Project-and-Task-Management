@@ -153,3 +153,24 @@ def display_task(request):
         project_id = project_object.id
         task_object = task.objects.filter(project=project_id)
         return render(request,"display_task.html",{"tasks":task_object})
+    
+def update_task(request):
+    if request.session.get("team_lead"):
+        team_lead = request.session.get("team_lead")
+        user_object = user.objects.get(user_id=team_lead)
+        team_lead_id = user_object.id
+        project_object = project.objects.get(team_lead=team_lead_id)
+        project_id = project_object.id
+        task_object = task.objects.filter(project=project_id)
+        return render(request,"update_task.html",{"task":task_object})
+    
+
+def delete_task(request):
+    if request.session.get("team_lead"):
+        team_lead = request.session.get("team_lead")
+        user_object = user.objects.get(user_id=team_lead)
+        team_lead_id = user_object.id
+        project_object = project.objects.get(team_lead=team_lead_id)
+        project_id = project_object.id
+        task_object = task.objects.filter(project=project_id)
+        return render(request,"delete_task.html",{"task":task_object})
