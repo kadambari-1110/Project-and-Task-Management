@@ -174,3 +174,26 @@ def delete_task(request):
         project_id = project_object.id
         task_object = task.objects.filter(project=project_id)
         return render(request,"delete_task.html",{"task":task_object})
+
+def view_task(request):
+    if request.session.get("member"):
+        member = request.session.get("member")
+        user_object = user.objects.get(user_id=member)
+        member_id = user_object.id
+        task_object = task.objects.filter(members=member_id)
+        return render(request,"view_task.html",{"task":task_object})
+
+
+def edit_task(request):
+    if request.session.get('member'):
+        member = request.session.get("member")
+        user_object = user.objects.get(user_id=member)
+        member_id = user_object.id
+        task_object = task.objects.filter(members=member_id)
+        return render(request,"edit_task.html",{"task":task_object})
+
+
+def member_session_end(request):
+    if request.session.get('member'):
+        del request.session['member']
+        return redirect('index')

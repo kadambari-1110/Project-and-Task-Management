@@ -25,12 +25,15 @@ urlpatterns = [
     
     path('admin_session_end',views.admin_session_end,name="admin_session_end"),
     path('team_lead_session_end',views.team_lead_session_end,name="team_lead_session_end"),
+    path('member_session_end',views.member_session_end,name="member_session_end"),
 
     path('task_submit',views.task_submit,name="task_submit"),
     path('display_task',views.display_task,name="display_task"),
 
     path('update_task',views.update_task,name="update_task"),
     path('delete_task',views.delete_task,name="delete_task"),
+   path('view_task',views.view_task),
+   path('edit_task',views.edit_task),
    
 
   
