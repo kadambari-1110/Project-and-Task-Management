@@ -67,7 +67,7 @@
             <td>{{ i.deadline }}</td>
             <td>{{ i.description }}</td>
             <td>
-              <a href="{% url 'delete_project' i.id %}" class="btn btn-primary btn-sm" onclick="return alert('Are you sure?')">Delete</a>
+              <a href="{% url 'delete_project' i.id %}" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
             </td>
           </tr>
           {% endfor %}

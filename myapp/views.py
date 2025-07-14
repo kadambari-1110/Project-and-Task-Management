@@ -197,3 +197,23 @@ def member_session_end(request):
     if request.session.get('member'):
         del request.session['member']
         return redirect('index')
+
+def display_task_details(request,id):
+    if request.session.get("team_lead"):
+        team_lead_us = request.session.get("team_lead")
+        user_object = user.objects.get(user_id=team_lead_us)
+        team_lead_id = user_object.id
+        project_object = project.objects.get(team_lead=team_lead_id)
+        project_id = project_object.id
+        task_object = task.objects.filter(project=project_id)
+        return render(request,"display_task_details.html",{"tasks":task_object})
+
+def update_task_submit(request):
+    if request.session.get("team_lead"):
+        team_lead_us = request.session.get("team_lead")
+        user_object = user.objects.get(user_id=team_lead_us)
+        team_lead_id = user_object.id
+        project_object = project.objects.get(team_lead=team_lead_id)
+        project_id = project_object.id
+        task_object = task.objects.filter(project=project_id)
+        return render(request,"update_task_submit.html",{"tasks":task_object})
