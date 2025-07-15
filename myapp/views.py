@@ -207,13 +207,54 @@ def display_task_details(request,id):
         project_id = project_object.id
         task_object = task.objects.filter(project=project_id)
         return render(request,"display_task_details.html",{"tasks":task_object})
+    elif request.session.get("member"):
+        member_us = request.session.get("member")
+        user_object = user.objects.get(user_id = member_us)
+        user_id = user_object.id
+        task_object = task.objects.get(members = user_id)
+        return render(request,"display_task_details.html",{"task":task_object})
 
-def update_task_submit(request):
+
+def update_task_submit(request,id):
     if request.session.get("team_lead"):
-        team_lead_us = request.session.get("team_lead")
-        user_object = user.objects.get(user_id=team_lead_us)
-        team_lead_id = user_object.id
-        project_object = project.objects.get(team_lead=team_lead_id)
-        project_id = project_object.id
-        task_object = task.objects.filter(project=project_id)
-        return render(request,"update_task_submit.html",{"tasks":task_object})
+        try:
+            task_object = task.objects.get(id=id)
+        except project.DoesNotExist:
+            return HttpResponse("Project not found")
+
+        if request.method == "POST":
+            # Update fields from the form
+            task_object.project = project.objects.get(id=request.POST.get("project"))
+            task_object.name = request.POST.get("name")
+            task_object.description = request.POST.get("description")
+            task_object.members = user.objects.get(name=request.POST.get("members"))
+            task_object.status = request.POST.get("status")
+            task_object.deadline = request.POST.get("deadline")
+            # Add other fields if your model has them
+
+            task_object.save()
+            return render(request,"display_task_details.html",{"task":task_object}) 
+        else:
+            return render(request, "update_task_submit.html", {"task": task_object})
+
+def edit_task_submit(request,id):
+    if request.session.get("member"):
+        try:
+            task_object = task.objects.get(id=id)
+        except project.DoesNotExist:
+            return HttpResponse("Project not found")
+
+        if request.method == "POST":
+            # Update fields from the form
+            task_object.project = project.objects.get(id=request.POST.get("project"))
+            task_object.name = request.POST.get("name")
+            task_object.description = request.POST.get("description")
+            task_object.members = user.objects.get(name=request.POST.get("members"))
+            task_object.status = request.POST.get("status")
+            task_object.deadline = request.POST.get("deadline")
+            # Add other fields if your model has them
+
+            task_object.save()
+            return render(request,"display_task_details.html",{"task":task_object}) 
+        else:
+            return render(request, "update_task_submit.html", {"task": task_object})

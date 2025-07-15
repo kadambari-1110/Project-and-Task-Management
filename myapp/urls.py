@@ -37,7 +37,8 @@ urlpatterns = [
    
 
    path("display_task_details/<int:id>",views.display_task_details,name="display_task_details"),
-   path("update_task_submit",views.update_task_submit)
+   path("update_task_submit/<int:id>",views.update_task_submit,name="update_task_submit"),
+   path("edit_task_submit/<int:id>",views.edit_task_submit),
 
   
 ]

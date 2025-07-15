@@ -71,7 +71,7 @@
             <td>{{ i.deadline }}</td>
             <td>{{ i.status }}</td>
             <td>
-              <a href="{% url 'display_project_details' i.id %}" class="btn btn-primary btn-sm">View</a>
+              <a href="{% url 'display_task_details' i.id %}" class="btn btn-primary btn-sm">View</a>
             </td>
           </tr>
           {% endfor %}
