@@ -206,12 +206,12 @@ def display_task_details(request,id):
         project_object = project.objects.get(team_lead=team_lead_id)
         project_id = project_object.id
         task_object = task.objects.filter(project=project_id)
-        return render(request,"display_task_details.html",{"tasks":task_object})
+        return render(request,"display_task_details.html",{"task":task_object})
     elif request.session.get("member"):
         member_us = request.session.get("member")
         user_object = user.objects.get(user_id = member_us)
         user_id = user_object.id
-        task_object = task.objects.get(members = user_id)
+        task_object = task.objects.filter(members = user_id)
         return render(request,"display_task_details.html",{"task":task_object})
 
 
